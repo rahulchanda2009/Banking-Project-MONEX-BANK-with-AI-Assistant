@@ -3,6 +3,7 @@
 A lightweight, containerised internet banking application running on Minikube, with an AI Assistant layer monitored and protected by **Splunk Agent Observability (Galileo)**.
 
 **MONEX BANK LOGIN**
+
 <img width="684" height="430" alt="monex1" src="https://github.com/user-attachments/assets/012a635e-f95d-4b4d-88d9-e7790dd5ee28" />
 
 **AI ASSISTANT**
