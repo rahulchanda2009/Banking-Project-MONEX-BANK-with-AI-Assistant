@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+set -e
+cd "$(dirname "$0")"
+
+# ⬇️ Python SSL must use Homebrew's CA bundle
+export SSL_CERT_FILE=/opt/homebrew/etc/ca-certificates/cert.pem
+export REQUESTS_CA_BUNDLE=/opt/homebrew/etc/ca-certificates/cert.pem
+
+# Ensure venv exists
+if [ ! -d "venv" ]; then
+  python3.11 -m venv venv
+fi
+source venv/bin/activate
+pip install --quiet --upgrade pip
+pip install --quiet -r requirements.txt
+
+# Start backend port-forward in background (if not already running)
+if ! lsof -i :8080 >/dev/null 2>&1; then
+  echo "Starting backend port-forward on :8080 ..."
+  kubectl port-forward -n banking svc/backend-service 8080:8080 > pf-backend.log 2>&1 &
+  echo $! > .pf.pid
+  sleep 3
+fi
+
+# Start AI service in background (uvicorn), logging to ai.log
+echo "Starting AI service on :3001 ..."
+nohup uvicorn server:app --host 0.0.0.0 --port 3001 > ai.log 2>&1 &
+echo $! > .ai.pid
+
+echo "✅ AI service PID $(cat .ai.pid) | port-forward PID $(cat .pf.pid 2>/dev/null)"
+echo "   Logs: ai-service/ai.log  and  ai-service/pf-backend.log"
