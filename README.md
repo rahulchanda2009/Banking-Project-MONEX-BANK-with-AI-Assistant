@@ -109,33 +109,7 @@ Cisco Secure Access re-signs TLS certificates. Containers don't trust the Cisco 
 ---
 
 ## Project Structure
-
-Banking-Project/
-├── database/
-│   ├── Dockerfile
-│   └── init.sql
-├── backend/
-│   ├── Dockerfile
-│   └── src/main/java/com/monex/banking/controller/BankController.java
-├── frontend/
-│   ├── Dockerfile
-│   ├── nginx.conf
-│   └── src/components/ChatBot.js
-├── k8s/
-│   ├── namespace.yaml
-│   ├── postgres.yaml
-│   ├── backend.yaml
-│   └── frontend.yaml
-└── ai-service/
-    ├── server.py
-    ├── start-ai.sh
-    ├── requirements.txt
-    ├── .env                 # NOT committed – contains API keys
-    ├── knowledge/
-    │   └── monex_kb.md
-    ├── venv-ac/             # Python 3.12 venv (Agent Control)
-    ├── ai.log
-    └── pf-backend.log
+<img width="503" height="433" alt="projectstrct" src="https://github.com/user-attachments/assets/d392287e-a3ec-4b54-be88-da2bf6d0df86" />
 
 
 ---
